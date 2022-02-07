@@ -1,9 +1,6 @@
 package fr.uga.im2ag.l3.miage.db.model;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
@@ -12,6 +9,7 @@ import java.util.List;
 public class Student extends Person {
 
     @ManyToOne
+    //@JoinColumn(name = "class", referencedColumnName = "id")
     private GraduationClass belongTo;
 
     @OneToMany

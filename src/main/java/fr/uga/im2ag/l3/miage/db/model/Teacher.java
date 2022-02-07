@@ -1,5 +1,7 @@
 package fr.uga.im2ag.l3.miage.db.model;
 
+import jdk.jfr.Name;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,7 +13,8 @@ public class Teacher extends Person {
     @ManyToOne
     private Subject teaching;
 
-    @OneToMany
+    @OneToMany()
+    @Name("Favorites")
     private List<Student> favorites;
 
     @OneToOne
