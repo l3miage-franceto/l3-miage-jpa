@@ -5,6 +5,7 @@ import fr.uga.im2ag.l3.miage.db.model.Grade;
 import fr.uga.im2ag.l3.miage.db.model.Subject;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NamedQuery;
 import java.util.List;
 
 public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepository {
@@ -21,18 +22,21 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
     @Override
     public List<Grade> findHighestGrades(int limit) {
         // TODO
-        return null;
+        return entityManager.createNamedQuery("Grade.findHighestGrades", Grade.class).setParameter("limit", limit).getResultList();
     }
 
     @Override
     public List<Grade> findHighestGradesBySubject(int limit, Subject subject) {
         // TODO
-        return null;
+        return entityManager.createNamedQuery("Grade.findHighestGradeByStudent", Grade.class)
+                .setParameter("subject", subject)
+                .setParameter("limit", limit)
+                .getResultList();
     }
 
     @Override
     public void save(Grade entity) {
-       entityManager.persist(entity);
+        entityManager.persist(entity);
     }
 
     @Override

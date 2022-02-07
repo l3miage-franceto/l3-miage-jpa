@@ -3,12 +3,17 @@ package fr.uga.im2ag.l3.miage.db.model;
 import javax.persistence.*;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
+@NamedQueries({
+        @NamedQuery(name = "Grade.findHighestGrades", query = "select g from Grade g where g.value > :limit"),
+        @NamedQuery(name = "Grade.findHighestGradeByStudent", query = "select g from Grade g where g.subject = :subject and g.value > :limit")
+})
 @Entity
 @Table(name = "Grade")
 public class Grade {
 
     @Id
     @GeneratedValue
+    @Column(name = "grade_id")
     private Long id;
 
     @ManyToOne
@@ -17,6 +22,7 @@ public class Grade {
     @Column(name = "grade_value")
     private Float value;
 
+    @Column(name = "grade_weight")
     private Float weight;
 
     public Long getId() {

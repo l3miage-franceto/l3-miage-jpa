@@ -1,14 +1,27 @@
 package fr.uga.im2ag.l3.miage.db.model;
 
+import jdk.jfr.Name;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
+@Entity
 public class GraduationClass {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "graduation_class_id")
     private Long id;
+
+    @Column(name = "graduation_class_name")
     private String name;
+
+    @Column(name = "graduation_class_year")
     private Integer year;
+
+    @OneToMany(mappedBy = "belongTo")
     private List<Student> students;
 
     public Long getId() {
