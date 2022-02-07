@@ -4,12 +4,14 @@ import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 import fr.uga.im2ag.l3.miage.db.model.Subject;
 import fr.uga.im2ag.l3.miage.db.model.Teacher;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.Table;
 import java.util.Collection;
 import java.util.List;
 
 public class SubjectRepositoryImpl extends BaseRepositoryImpl implements SubjectRepository {
-
 
     public SubjectRepositoryImpl(EntityManager entityManager) {
         super(entityManager);
