@@ -12,13 +12,11 @@ public class GraduationClass {
 
     @Id
     @GeneratedValue
-    @Column(name = "graduation_class_id")
     private Long id;
 
-    @Column(name = "graduation_class_name")
     private String name;
 
-    @Column(name = "graduation_class_year")
+    @Column(name = "gc_year")
     private Integer year;
 
     @OneToMany(mappedBy = "belongTo")

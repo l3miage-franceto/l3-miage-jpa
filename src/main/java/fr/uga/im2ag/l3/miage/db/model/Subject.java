@@ -11,19 +11,10 @@ public class Subject {
 
     @Id
     @GeneratedValue
-    @Column(name = "subject_id")
     private Long id;
-
-    @Column(name = "subject_name")
     private String name;
-
-    @Column(name = "subject_points")
     private Integer points;
-
-    @Column(name = "subject_hours")
     private Float hours;
-
-    @Column(name = "subject_start")
     private Date start;
 
     @Column(name = "subject_end")

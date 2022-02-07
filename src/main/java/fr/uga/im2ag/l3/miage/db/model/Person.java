@@ -10,19 +10,10 @@ public abstract class Person {
 
     @Id
     @GeneratedValue
-    @Column(name = "person_id")
     private Long id;
-
-    @Column(name = "person_gender")
     private Gender gender;
-
-    @Column(name = "person_firstname")
     private String firstName;
-
-    @Column(name = "person_lastname")
     private String lastName;
-
-    @Column(name = "person_birth")
     private Date birth;
 
     public Long getId() {

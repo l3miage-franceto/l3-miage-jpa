@@ -13,7 +13,6 @@ public class Grade {
 
     @Id
     @GeneratedValue
-    @Column(name = "grade_id")
     private Long id;
 
     @ManyToOne
@@ -22,7 +21,6 @@ public class Grade {
     @Column(name = "grade_value")
     private Float value;
 
-    @Column(name = "grade_weight")
     private Float weight;
 
     public Long getId() {
