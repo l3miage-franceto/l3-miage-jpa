@@ -4,13 +4,11 @@ import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 import fr.uga.im2ag.l3.miage.db.model.Subject;
 import fr.uga.im2ag.l3.miage.db.model.Teacher;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
 
+//@NamedQuery(name = "Subject.getAll", query = "select '*' from Subject")
 public class SubjectRepositoryImpl extends BaseRepositoryImpl implements SubjectRepository {
 
     public SubjectRepositoryImpl(EntityManager entityManager) {
@@ -30,13 +28,14 @@ public class SubjectRepositoryImpl extends BaseRepositoryImpl implements Subject
     @Override
     public Subject findById(Long id) {
         // TODO
-        return null;
+        return entityManager.find(Subject.class, id);
     }
 
     @Override
     public List<Subject> getAll() {
         // TODO
-        return null;
+        return entityManager.createQuery("select '*' from Subject", Subject.class)
+                .getResultList();
     }
 
     @Override

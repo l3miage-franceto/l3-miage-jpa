@@ -8,15 +8,15 @@ import javax.persistence.*;
 public class Grade {
 
     @Id
+    @GeneratedValue
     private Long id;
 
     @ManyToOne
     private Subject subject;
 
-    @Column(name = "value")
+    @Column(name = "grade_value")
     private Float value;
 
-    @Column(name = "weight")
     private Float weight;
 
     public Long getId() {
