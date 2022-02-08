@@ -8,6 +8,11 @@ import java.util.List;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "GraduationClass.findByYearAndName", query = "select gc from GraduationClass gc where gc.name = :name and gc.year = :year "),
+        @NamedQuery(name = "GraduationClass.findById", query = "select gc from GraduationClass gc where gc.id = :id"),
+        @NamedQuery(name = "GraduationClass.getAll", query = "select gc from GraduationClass gc")
+})
 public class GraduationClass {
 
     @Id

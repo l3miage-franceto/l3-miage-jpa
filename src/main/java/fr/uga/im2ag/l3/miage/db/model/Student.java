@@ -6,6 +6,10 @@ import java.util.List;
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
 @DiscriminatorValue("student")
+@NamedQueries({
+        @NamedQuery(name = "Student.findById", query = "select s from Student s where s.id = :id"),
+        @NamedQuery(name = "Student.getAll", query = "select s from Student s")
+})
 public class Student extends Person {
 
     @ManyToOne

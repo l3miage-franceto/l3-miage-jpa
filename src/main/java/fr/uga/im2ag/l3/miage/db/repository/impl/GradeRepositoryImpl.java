@@ -46,12 +46,15 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
 
     @Override
     public Grade findById(Long id) {
-        return null;
+        return entityManager.createNamedQuery("Grade.findById", Grade.class)
+                .setParameter("id", id)
+                .getResultList()
+                .get(0);
     }
 
     @Override
     public List<Grade> getAll() {
         // TODO
-        return null;
+        return entityManager.createNamedQuery("Grade.getAll", Grade.class).getResultList();
     }
 }

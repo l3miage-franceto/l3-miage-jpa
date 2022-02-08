@@ -35,7 +35,10 @@ class SubjectTest extends Base {
 
         var pSubject = subjectRepository.findById(subject.getId());
         assertThat(pSubject).isNotNull().isNotSameAs(subject);
+        System.out.println("Assert subject name is good");
+        System.out.println(String.format("Subject name = %s", pSubject.getName()));
         assertThat(pSubject.getName()).isEqualTo(subject.getName());
+        System.out.println("End Assert subject name is good");
 
     }
 
