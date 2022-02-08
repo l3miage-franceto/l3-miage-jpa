@@ -7,23 +7,30 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Subject")
+@NamedQueries({
+        @NamedQuery(name = "Subject.getAll", query = "select s from Subject s"),
+        @NamedQuery(name = "Subject.findTeachers", query = "select t from Teacher t join t.teaching s where s.id = :id")
+})
 public class Subject {
 
     @Id
     @GeneratedValue
+    @Column(name = "sub_id")
     private Long id;
+
+    @Column(name = "sub_name")
     private String name;
 
-    @Column(name = "s_points")
+    @Column(name = "sub_points")
     private Integer points;
 
-    @Column(name = "s_hours")
+    @Column(name = "sub_hours")
     private Float hours;
 
-    @Column(name = "s_start")
+    @Column(name = "sub_start")
     private Date start;
 
-    @Column(name = "s_end")
+    @Column(name = "sub_end")
     private Date end;
 
     public Long getId() {

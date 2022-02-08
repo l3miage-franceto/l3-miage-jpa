@@ -13,6 +13,18 @@
         <class>fr.uga.im2ag.l3.miage.db.model.Teacher</class>
         <class>fr.uga.im2ag.l3.miage.db.model.GraduationClass</class>
 
+        <!-- Properties pour se connecter à la base franceto -->
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@im2ag-oracle.e.ujf-grenoble.fr:1521:im2ag"/>
+            <property name="javax.persistence.jdbc.user" value="franceto"/>
+            <property name="javax.persistence.jdbc.password" value="31788d2ff9"/>
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle8iDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+        </properties>
+
+        <!--
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:db1;DB_CLOSE_DELAY=-1;"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>
@@ -22,6 +34,7 @@
             <property name="hibernate.dialect" value="H2"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>
+        -->
 
     </persistence-unit>
 </persistence>

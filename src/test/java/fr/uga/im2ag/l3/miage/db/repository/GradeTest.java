@@ -11,12 +11,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class GradeTest extends Base {
 
     GradeRepository gradeRepository;
-    SubjectRepository subjectRepository;
 
     @BeforeEach
     void before() {
         gradeRepository = daoFactory.newGradeRepository(entityManager);
-        subjectRepository = daoFactory.newSubjectRepository(entityManager);
     }
 
     @AfterEach
@@ -29,11 +27,10 @@ class GradeTest extends Base {
     @Test
     void shouldSaveGrade() {
         // TODO
-        final var subject = Fixtures.createSubject();
-        final var grade = Fixtures.createGrade(subject);
+        final var grade = Fixtures.createGrade(Fixtures.createSubject());
 
         entityManager.getTransaction().begin();
-        subjectRepository.save(subject);
+        entityManager.persist(grade.getSubject());
         gradeRepository.save(grade);
         entityManager.getTransaction().commit();
         entityManager.detach(grade);

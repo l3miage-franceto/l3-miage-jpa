@@ -15,14 +15,16 @@ public class Grade {
 
     @Id
     @GeneratedValue
+    @Column(name = "g_id")
     private Long id;
 
     @ManyToOne
     private Subject subject;
 
-    @Column(name = "grade_value")
+    @Column(name = "g_value")
     private Float value;
 
+    @Column(name = "g_weight")
     private Float weight;
 
     public Long getId() {

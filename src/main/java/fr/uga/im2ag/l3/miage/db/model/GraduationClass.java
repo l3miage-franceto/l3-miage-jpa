@@ -10,21 +10,23 @@ import java.util.List;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "GraduationClass.findByYearAndName", query = "select gc from GraduationClass gc where gc.name = :name and gc.year = :year "),
-        @NamedQuery(name = "GraduationClass.findById", query = "select gc from GraduationClass gc where gc.id = :id"),
         @NamedQuery(name = "GraduationClass.getAll", query = "select gc from GraduationClass gc")
 })
 public class GraduationClass {
 
     @Id
     @GeneratedValue
+    @Column(name = "gc_id")
     private Long id;
 
+    @Column(name = "gc_name")
     private String name;
 
     @Column(name = "gc_year")
     private Integer year;
 
     @OneToMany(mappedBy = "belongTo")
+    @Column(name = "gc_students")
     private List<Student> students;
 
     public Long getId() {

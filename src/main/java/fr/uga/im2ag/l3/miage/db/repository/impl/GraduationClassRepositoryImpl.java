@@ -35,10 +35,7 @@ public class GraduationClassRepositoryImpl extends BaseRepositoryImpl implements
     @Override
     public GraduationClass findById(Long id) {
         // TODO
-        return entityManager.createNamedQuery("GraduationClass.findById", GraduationClass.class)
-                .setParameter("id", id)
-                .getResultList()
-                .get(0);
+        return entityManager.find(GraduationClass.class, id);
     }
 
     @Override

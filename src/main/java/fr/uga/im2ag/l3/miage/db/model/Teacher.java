@@ -7,11 +7,9 @@ import java.util.List;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
-@DiscriminatorValue("teacher")
+@DiscriminatorValue(PersonType.Values.TEACHER)
 @NamedQueries({
-        @NamedQuery(name = "Teacher.findHeadingGraduationClassByYearAndName",
-                query = "select t from Teacher t join t.heading gc where gc.year = :year and gc.name = :name"),
-        @NamedQuery(name = "Teacher.findById", query = "select t from Teacher t where t.id = :id"),
+        @NamedQuery(name = "Teacher.findHeadingGraduationClassByYearAndName", query = "select t from Teacher t join t.heading gc where gc.year = :year and gc.name = :name"),
         @NamedQuery(name = "Teacher.getAll", query = "select t from Teacher t")
 })
 public class Teacher extends Person {

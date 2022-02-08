@@ -5,15 +5,15 @@ import java.util.List;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
-@DiscriminatorValue("student")
+@DiscriminatorValue(PersonType.Values.STUDENT)
 @NamedQueries({
         @NamedQuery(name = "Student.findById", query = "select s from Student s where s.id = :id"),
+        @NamedQuery(name = "Student.findStudentHavingGradeAverageAbove", query = "select s from Student s join s.grades g group by s.id having avg(g.value) > :minAverage"),
         @NamedQuery(name = "Student.getAll", query = "select s from Student s")
 })
 public class Student extends Person {
 
     @ManyToOne
-    //@JoinColumn(name = "class", referencedColumnName = "id")
     private GraduationClass belongTo;
 
     @OneToMany
