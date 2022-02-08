@@ -13,11 +13,17 @@ public class Subject {
     @GeneratedValue
     private Long id;
     private String name;
+
+    @Column(name = "s_points")
     private Integer points;
+
+    @Column(name = "s_hours")
     private Float hours;
+
+    @Column(name = "s_start")
     private Date start;
 
-    @Column(name = "subject_end")
+    @Column(name = "s_end")
     private Date end;
 
     public Long getId() {
