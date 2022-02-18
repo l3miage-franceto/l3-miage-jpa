@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -109,12 +110,13 @@ class SubjectTest extends Base {
 
         entityManager.getTransaction().commit();
 
-        var pTeachersSubject1 = subjectRepository.findTeachers(subject1.getId());
-        assertThat(pTeachersSubject1).isNotNull().isEqualTo(teachersSubject1);
+        var pTeachersSubject1 = (ArrayList<Teacher>) subjectRepository.findTeachers(subject1.getId());
+        var pTeachersSubject1Rep = new ArrayList<>(Arrays.asList(teacher1));
+        assertThat(pTeachersSubject1).isNotNull().isEqualTo(pTeachersSubject1Rep);
 
-        var pTeachersSubject2 = subjectRepository.findTeachers(subject2.getId());
-        assertThat(pTeachersSubject2).isNotNull().isEqualTo(teachersSubject2);
-
+        var pTeachersSubject2 = (ArrayList<Teacher>) subjectRepository.findTeachers(subject2.getId());
+        var pTeachersSubject2Rep = new ArrayList<>(Arrays.asList(teacher2, teacher3));
+        assertThat(pTeachersSubject2).isNotNull().isEqualTo(pTeachersSubject2Rep);
     }
 
 }

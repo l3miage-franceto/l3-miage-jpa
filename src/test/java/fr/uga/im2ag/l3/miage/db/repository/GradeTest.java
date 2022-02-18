@@ -1,11 +1,16 @@
 package fr.uga.im2ag.l3.miage.db.repository;
 
+import fr.uga.im2ag.l3.miage.db.model.Grade;
 import fr.uga.im2ag.l3.miage.db.repository.api.GradeRepository;
 import fr.uga.im2ag.l3.miage.db.repository.api.SubjectRepository;
 import lombok.extern.java.Log;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -65,11 +70,89 @@ class GradeTest extends Base {
     @Test
     void shouldFindHighestGrades() {
         // TODO
+        final var subject1 = Fixtures.createSubject();
+        final var subject2 = Fixtures.createSubject();
+        final var subject3 = Fixtures.createSubject();
+
+        final var grade1 = Fixtures.createGrade(subject1);
+        final var grade2 = Fixtures.createGrade(subject2);
+        final var grade3 = Fixtures.createGrade(subject2);
+        final var grade4 = Fixtures.createGrade(subject3);
+
+        grade1.setValue((float) 17.0);
+        grade2.setValue((float) 13.6);
+        grade3.setValue((float) 11.3);
+        grade4.setValue((float) 14.1);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(subject1);
+        entityManager.persist(subject2);
+        entityManager.persist(subject3);
+
+        gradeRepository.save(grade1);
+        gradeRepository.save(grade2);
+        gradeRepository.save(grade3);
+        gradeRepository.save(grade4);
+
+        entityManager.getTransaction().commit();
+
+        var pGrade1 = gradeRepository.findById(grade1.getId());
+        var pGrade2 = gradeRepository.findById(grade2.getId());
+        var pGrade3 = gradeRepository.findById(grade3.getId());
+        var pGrade4 = gradeRepository.findById(grade4.getId());
+
+        assertThat(pGrade1).isNotNull();
+        assertThat(pGrade2).isNotNull();
+        assertThat(pGrade3).isNotNull();
+        assertThat(pGrade4).isNotNull();
+
+        var higherGrades = (ArrayList<Grade>) gradeRepository.findHighestGrades((float)14.0);
+        var higherGradesR = new ArrayList<>(Arrays.asList(grade1, grade4));
+        assertThat(higherGrades).isEqualTo(higherGradesR);
     }
 
     @Test
     void shouldFindHighestGradesBySubject() {
         // TODO
+        final var subject1 = Fixtures.createSubject();
+        final var subject2 = Fixtures.createSubject();
+        final var subject3 = Fixtures.createSubject();
+
+        final var grade1 = Fixtures.createGrade(subject1);
+        final var grade2 = Fixtures.createGrade(subject2);
+        final var grade3 = Fixtures.createGrade(subject2);
+        final var grade4 = Fixtures.createGrade(subject3);
+
+        grade1.setValue((float) 17.0);
+        grade2.setValue((float) 13.6);
+        grade3.setValue((float) 11.3);
+        grade4.setValue((float) 14.1);
+
+        entityManager.getTransaction().begin();
+        entityManager.persist(subject1);
+        entityManager.persist(subject2);
+        entityManager.persist(subject3);
+
+        gradeRepository.save(grade1);
+        gradeRepository.save(grade2);
+        gradeRepository.save(grade3);
+        gradeRepository.save(grade4);
+
+        entityManager.getTransaction().commit();
+
+        var pGrade1 = gradeRepository.findById(grade1.getId());
+        var pGrade2 = gradeRepository.findById(grade2.getId());
+        var pGrade3 = gradeRepository.findById(grade3.getId());
+        var pGrade4 = gradeRepository.findById(grade4.getId());
+
+        assertThat(pGrade1).isNotNull();
+        assertThat(pGrade2).isNotNull();
+        assertThat(pGrade3).isNotNull();
+        assertThat(pGrade4).isNotNull();
+
+        var higherGradesSubject = (ArrayList<Grade>) gradeRepository.findHighestGradesBySubject((float) 13.1, subject2);
+        var higherGradesSubjectR = new ArrayList<>(Arrays.asList(grade2));
+        assertThat(higherGradesSubject).isEqualTo(higherGradesSubjectR);
     }
 
 }

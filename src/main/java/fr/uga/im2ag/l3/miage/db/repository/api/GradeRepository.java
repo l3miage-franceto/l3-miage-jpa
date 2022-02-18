@@ -12,7 +12,7 @@ public interface GradeRepository extends Repository<Grade, Long> {
      * @param limit number of grades to return
      * @return a list of the nth best grades
      */
-    List<Grade> findHighestGrades(int limit);
+    List<Grade> findHighestGrades(float limit);
 
 
 
@@ -21,6 +21,6 @@ public interface GradeRepository extends Repository<Grade, Long> {
      * @param limit number of grades to return
      * @return a list of the nth best grades for the subject
      */
-    List<Grade> findHighestGradesBySubject(int limit, Subject subject);
+    List<Grade> findHighestGradesBySubject(float limit, Subject subject);
 
 }
