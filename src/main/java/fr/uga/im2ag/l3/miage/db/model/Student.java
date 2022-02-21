@@ -2,6 +2,7 @@ package fr.uga.im2ag.l3.miage.db.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
@@ -35,5 +36,23 @@ public class Student extends Person {
     public Student setGrades(List<Grade> grades) {
         this.grades = grades;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return super.equals((Person) o) && Objects.equals(getId(), student.getId()) && Objects.equals(getFirstName(), student.getFirstName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), belongTo);
+    }
+
+    @Override
+    public String toString(){
+        return "ID student " + getId() + "\nFN " + getFirstName() + "\nLN " + getLastName() + "\nID person " + super.getId();
     }
 }

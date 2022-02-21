@@ -2,6 +2,7 @@ package fr.uga.im2ag.l3.miage.db.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Entity
@@ -74,4 +75,16 @@ public abstract class Person {
         FEMALE, MALE, FLUID
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(id, person.id) && gender == person.gender && Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, gender, firstName, lastName);
+    }
 }

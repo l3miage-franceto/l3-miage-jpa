@@ -2,6 +2,7 @@ package fr.uga.im2ag.l3.miage.db.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 
@@ -85,5 +86,23 @@ public class Subject {
     public Subject setEnd(Date end) {
         this.end = end;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subject subject = (Subject) o;
+        return Objects.equals(id, subject.id) && Objects.equals(name, subject.name) && Objects.equals(points, subject.points) && Objects.equals(hours, subject.hours) ;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, points, hours);
+    }
+
+    @Override
+    public String toString(){
+        return "\nSubject ID " + getId() + "\nSubject name " + getName() + "\nSubject points " + getPoints() + "\nSubject hours " + getHours();
     }
 }

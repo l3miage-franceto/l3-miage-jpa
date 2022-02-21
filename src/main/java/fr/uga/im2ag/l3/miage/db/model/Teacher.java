@@ -4,6 +4,7 @@ import jdk.jfr.Name;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @Entity
@@ -51,4 +52,30 @@ public class Teacher extends Person {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Teacher teacher = (Teacher) o;
+        return super.equals((Person) o)
+                && Objects.equals(getId(), teacher.getId())
+                && Objects.equals(getFirstName(), teacher.getFirstName())
+                && Objects.equals(teaching, teacher.teaching)
+                && Objects.equals(heading, teacher.heading)
+                && favorites.equals(teacher.favorites);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), teaching, heading);
+    }
+
+    @Override
+    public String toString(){
+        return "ID teacher " + getId() + "\nFN " + getFirstName() + "\nLN " + getLastName()
+                + "\nID person " + super.getId() + "\ngender " + super.getGender() + "\nheading " + getHeading()
+                + "\nteaching " + getTeaching()
+                + "\nFavorite " + getFavorites().get(0).toString()
+                + "\nNb favorites " + getFavorites().size();
+    }
 }

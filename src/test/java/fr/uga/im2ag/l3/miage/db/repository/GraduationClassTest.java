@@ -24,6 +24,13 @@ class GraduationClassTest extends Base {
     @Test
     void shouldSaveClass() {
         // TODO
+        final var gradClass1 = Fixtures.createClass();
+        final var gradClass2 = Fixtures.createClass();
+
+        entityManager.getTransaction().begin();
+        classRepository.save(gradClass1);
+        classRepository.save(gradClass2);
+        entityManager.getTransaction().commit();
     }
 
 

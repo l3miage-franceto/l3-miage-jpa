@@ -1,6 +1,7 @@
 package fr.uga.im2ag.l3.miage.db.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 // TODO ajouter une named query pour une des requêtes à faire dans le repository
 @NamedQueries({
@@ -57,4 +58,18 @@ public class Grade {
         this.weight = weight;
         return this;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Grade grade = (Grade) o;
+        return Objects.equals(id, grade.id) && Objects.equals(subject, grade.subject) && Objects.equals(value, grade.value) && Objects.equals(weight, grade.weight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, subject, value, weight);
+    }
+
 }
