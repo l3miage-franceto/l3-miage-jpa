@@ -57,12 +57,7 @@ public class Teacher extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Teacher teacher = (Teacher) o;
-        return super.equals((Person) o)
-                && Objects.equals(getId(), teacher.getId())
-                && Objects.equals(getFirstName(), teacher.getFirstName())
-                && Objects.equals(teaching, teacher.teaching)
-                && Objects.equals(heading, teacher.heading)
-                && favorites.equals(teacher.favorites);
+        return super.equals((Person) o) && Objects.equals(teaching, teacher.teaching) && Objects.equals(heading, teacher.heading);
     }
 
     @Override

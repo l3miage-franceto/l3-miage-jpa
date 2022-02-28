@@ -9,7 +9,7 @@ import java.util.Objects;
 @DiscriminatorValue(PersonType.Values.STUDENT)
 @NamedQueries({
         @NamedQuery(name = "Student.findById", query = "select s from Student s where s.id = :id"),
-        @NamedQuery(name = "Student.findStudentHavingGradeAverageAbove", query = "select s from Student s join s.grades g group by s.id having avg(g.value) > :minAverage"),
+        @NamedQuery(name = "Student.findStudentHavingGradeAverageAbove", query = "select s from Student s where s.id in (select s2.id from Student s2 join s2.grades g group by s2.id having (sum(g.value * g.weight)/sum(g.weight)) > :minAverage)"),  //(sum(g.value * g.weight)/sum(g.weight))
         @NamedQuery(name = "Student.getAll", query = "select s from Student s")
 })
 public class Student extends Person {
@@ -43,7 +43,7 @@ public class Student extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return super.equals((Person) o) && Objects.equals(getId(), student.getId()) && Objects.equals(getFirstName(), student.getFirstName());
+        return super.equals((Person) o) && Objects.equals(getBelongTo(), student.getBelongTo());
     }
 
     @Override

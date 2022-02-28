@@ -78,11 +78,11 @@ public class GraduationClass {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GraduationClass that = (GraduationClass) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(year, that.year) && Objects.equals(students, that.students);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(year, that.year);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, students);
+        return Objects.hash(id, name, year);
     }
 }
