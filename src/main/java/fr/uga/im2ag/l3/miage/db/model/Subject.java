@@ -19,19 +19,19 @@ public class Subject {
     @Column(name = "sub_id")
     private Long id;
 
-    @Column(name = "sub_name")
+    @Column(name = "sub_name", unique = true, nullable = false)
     private String name;
 
     @Column(name = "sub_points")
     private Integer points;
 
-    @Column(name = "sub_hours")
+    @Column(name = "sub_hours", nullable = false)
     private Float hours;
 
-    @Column(name = "sub_start")
+    @Column(name = "sub_start", nullable = false)
     private Date start;
 
-    @Column(name = "sub_end")
+    @Column(name = "sub_end", nullable = false)
     private Date end;
 
     public Long getId() {
@@ -93,7 +93,10 @@ public class Subject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subject subject = (Subject) o;
-        return Objects.equals(id, subject.id) && Objects.equals(name, subject.name) && Objects.equals(points, subject.points) && Objects.equals(hours, subject.hours) ;
+        return Objects.equals(id, subject.id)
+                && Objects.equals(name, subject.name)
+                && Objects.equals(points, subject.points)
+                && Objects.equals(hours, subject.hours);
     }
 
     @Override
@@ -103,6 +106,12 @@ public class Subject {
 
     @Override
     public String toString(){
-        return "\nSubject ID " + getId() + "\nSubject name " + getName() + "\nSubject points " + getPoints() + "\nSubject hours " + getHours();
+        return String.format("Subject\nID : %d\nName : %s\nPoints : %d\nHours : %f\nStart : %s\nEnd : %s",
+                getId(),
+                getName(),
+                getPoints(),
+                getHours(),
+                getStart().toString(),
+                getEnd().toString());
     }
 }

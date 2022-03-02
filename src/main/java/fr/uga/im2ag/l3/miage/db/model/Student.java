@@ -17,7 +17,7 @@ public class Student extends Person {
     @ManyToOne
     private GraduationClass belongTo;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Grade> grades;
 
     public GraduationClass getBelongTo() {
@@ -43,16 +43,23 @@ public class Student extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return super.equals((Person) o) && Objects.equals(getBelongTo(), student.getBelongTo());
+        return super.equals((Person) o)
+                && Objects.equals(getBelongTo(), student.getBelongTo())
+                && Objects.equals(getGrades().stream().toList(), student.getGrades().stream().toList());
+                //on passe par stream().toList() car sinon grades est de type PersistentBag, qui implémente l'interface List, et sa méthode equals ne fonctionnait pas correctement
+                //ainsi on a bien grades qui est de type List
+
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), belongTo);
+        return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), belongTo, grades);
     }
 
     @Override
     public String toString(){
-        return "ID student " + getId() + "\nFN " + getFirstName() + "\nLN " + getLastName() + "\nID person " + super.getId();
+        return String.format("Student\n%s\nBelongs to class ID : %d, Name : %s\n",
+                super.toString(),
+                getBelongTo().getId(), getBelongTo().getName());
     }
 }

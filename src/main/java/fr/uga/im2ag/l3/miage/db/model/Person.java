@@ -14,13 +14,13 @@ public abstract class Person {
     @Column(name = "p_id")
     private Long id;
 
-    @Column(name = "p_gender")
+    @Column(name = "p_gender", nullable = false)
     private Gender gender;
 
-    @Column(name = "p_firstname")
+    @Column(name = "p_firstname", nullable = false)
     private String firstName;
 
-    @Column(name = "p_lastname")
+    @Column(name = "p_lastname", nullable = false)
     private String lastName;
 
     @Column(name = "p_birth")
@@ -86,5 +86,15 @@ public abstract class Person {
     @Override
     public int hashCode() {
         return Objects.hash(id, gender, firstName, lastName);
+    }
+
+    @Override
+    public String toString(){
+        return String.format("ID : %d\nGender : %s\nFirstname : %s\nLastname : %s\nBirthday : %s",
+                getId(),
+                getGender(),
+                getFirstName(),
+                getLastName(),
+                getBirth());
     }
 }

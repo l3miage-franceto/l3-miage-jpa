@@ -34,18 +34,17 @@ class TeacherTest extends Base {
         final var teacher2 = Fixtures.createTeacher(subject2, class2);
 
         entityManager.getTransaction().begin();
+
         entityManager.persist(subject1);
         entityManager.persist(class1);
         teacherRepository.save(teacher1);
+
         entityManager.persist(subject2);
         entityManager.persist(class2);
         teacherRepository.save(teacher2);
+
         entityManager.getTransaction().commit();
 
-        entityManager.detach(subject1);
-        entityManager.detach(subject2);
-        entityManager.detach(class1);
-        entityManager.detach(class2);
         entityManager.detach(teacher1);
         entityManager.detach(teacher2);
 

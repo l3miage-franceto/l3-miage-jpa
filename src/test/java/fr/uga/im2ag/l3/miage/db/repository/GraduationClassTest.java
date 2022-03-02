@@ -5,6 +5,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class GraduationClassTest extends Base {
@@ -39,6 +41,7 @@ class GraduationClassTest extends Base {
 
         var pClass1 = classRepository.findById(class1.getId());
         assertThat(pClass1).isNotNull().isNotSameAs(class1).isEqualTo(class1);
+
         var pClass2 = classRepository.findById(class2.getId());
         assertThat(pClass2).isNotNull().isNotSameAs(class2).isEqualTo(class2);
     }
@@ -69,8 +72,12 @@ class GraduationClassTest extends Base {
 
         var pClassBDSI2022 = classRepository.findByYearAndName(2022, "BDSI");
         assertThat(pClassBDSI2022).isNotNull().isNotSameAs(class1).isEqualTo(class1);
+
         var pClassProlog1978 = classRepository.findByYearAndName(1978, "Prolog");
         assertThat(pClassProlog1978).isNotNull().isNotSameAs(class2).isEqualTo(class2);
+
+        var pClassAngular2019 = classRepository.findByYearAndName(2019, "Angular");
+        assertThat(pClassAngular2019).isNotNull().isNotSameAs(class3).isEqualTo(class3);
 
     }
 

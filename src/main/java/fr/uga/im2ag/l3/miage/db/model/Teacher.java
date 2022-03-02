@@ -57,20 +57,23 @@ public class Teacher extends Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Teacher teacher = (Teacher) o;
-        return super.equals((Person) o) && Objects.equals(teaching, teacher.teaching) && Objects.equals(heading, teacher.heading);
+        return super.equals((Person) o)
+                && Objects.equals(teaching, teacher.teaching)
+                && Objects.equals(heading, teacher.heading)
+                && Objects.equals(favorites.stream().toList(), teacher.getFavorites().stream().toList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), teaching, heading);
+        return Objects.hash(getId(), getFirstName(), getLastName(), getGender(), teaching, heading, favorites);
     }
 
     @Override
     public String toString(){
-        return "ID teacher " + getId() + "\nFN " + getFirstName() + "\nLN " + getLastName()
-                + "\nID person " + super.getId() + "\ngender " + super.getGender() + "\nheading " + getHeading()
-                + "\nteaching " + getTeaching()
-                + "\nFavorite " + getFavorites().get(0).toString()
-                + "\nNb favorites " + getFavorites().size();
+        return String.format("Teacher\n%s\nTeaches subject ID : %d, Name : %s\nHave %d favorite students\nHeads class ID : %d, Name : %s",
+                super.toString(),
+                getTeaching().getId(), getTeaching().getName(),
+                getFavorites().size(),
+                getHeading().getId(), getHeading().getName());
     }
 }

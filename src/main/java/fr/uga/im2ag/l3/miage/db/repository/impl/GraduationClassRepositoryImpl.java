@@ -18,8 +18,7 @@ public class GraduationClassRepositoryImpl extends BaseRepositoryImpl implements
         return entityManager.createNamedQuery("GraduationClass.findByYearAndName", GraduationClass.class)
                 .setParameter("name", name)
                 .setParameter("year", year)
-                .getResultList()
-                .get(0);
+                .getSingleResult();
     }
 
     @Override

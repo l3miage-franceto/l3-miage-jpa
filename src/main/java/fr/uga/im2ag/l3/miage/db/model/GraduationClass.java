@@ -13,6 +13,9 @@ import java.util.Objects;
         @NamedQuery(name = "GraduationClass.findByYearAndName", query = "select gc from GraduationClass gc where gc.name = :name and gc.year = :year "),
         @NamedQuery(name = "GraduationClass.getAll", query = "select gc from GraduationClass gc")
 })
+@Table(uniqueConstraints =
+        { @UniqueConstraint(name = "uniqueClassNameForYear", columnNames = {"gc_name", "gc_year"}) }
+)
 public class GraduationClass {
 
     @Id
@@ -20,10 +23,10 @@ public class GraduationClass {
     @Column(name = "gc_id")
     private Long id;
 
-    @Column(name = "gc_name")
+    @Column(name = "gc_name", nullable = false)
     private String name;
 
-    @Column(name = "gc_year")
+    @Column(name = "gc_year", nullable = false)
     private Integer year;
 
     @OneToMany(mappedBy = "belongTo")
@@ -77,12 +80,17 @@ public class GraduationClass {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GraduationClass that = (GraduationClass) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(year, that.year);
+        GraduationClass gc = (GraduationClass) o;
+        return Objects.equals(id, gc.id)
+                && Objects.equals(name, gc.name)
+                && Objects.equals(year, gc.year)
+                && Objects.equals(getStudents().stream().toList(), gc.getStudents().stream().toList());
+                //on passe par stream().toList() car sinon students est de type PersistentBag, qui implémente l'interface List, et sa méthode equals ne fonctionnait pas correctement
+                //ainsi on a bien students qui est de type List
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, year);
+        return Objects.hash(id, name, year, students);
     }
 }

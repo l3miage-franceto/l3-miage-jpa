@@ -22,7 +22,7 @@ public class Grade {
     @ManyToOne
     private Subject subject;
 
-    @Column(name = "g_value")
+    @Column(name = "g_value", updatable = false)
     private Float value;
 
     @Column(name = "g_weight")
@@ -64,12 +64,24 @@ public class Grade {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Grade grade = (Grade) o;
-        return Objects.equals(id, grade.id) && Objects.equals(subject, grade.subject) && Objects.equals(value, grade.value) && Objects.equals(weight, grade.weight);
+        return Objects.equals(id, grade.id)
+                && Objects.equals(subject, grade.subject)
+                && Objects.equals(value, grade.value)
+                && Objects.equals(weight, grade.weight);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id, subject, value, weight);
+    }
+
+    @Override
+    public String toString(){
+        return String.format("Grade\nId : %d\nSubject ID : %d, Name : %s\nValue : %f\nWeight : %f\n",
+                getId(),
+                getSubject().getId(), getSubject().getName(),
+                getValue(),
+                getWeight());
     }
 
 }

@@ -23,8 +23,7 @@ public class TeacherRepositoryImpl extends BaseRepositoryImpl implements Teacher
         return entityManager.createNamedQuery("Teacher.findHeadingGraduationClassByYearAndName", Teacher.class)
                 .setParameter("year", year)
                 .setParameter("name", name)
-                .getResultList()
-                .get(0);
+                .getSingleResult();
     }
 
     @Override

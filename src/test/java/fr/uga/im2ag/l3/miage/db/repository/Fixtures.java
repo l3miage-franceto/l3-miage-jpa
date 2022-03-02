@@ -9,6 +9,7 @@ import fr.uga.im2ag.l3.miage.db.model.Subject;
 import fr.uga.im2ag.l3.miage.db.model.Teacher;
 
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +35,8 @@ public class Fixtures {
     public static GraduationClass createClass() {
         return new GraduationClass()
                 .setName(Faker.instance().zelda().character())
-                .setYear(2021);
+                .setYear(2021)
+                .setStudents(new ArrayList<>());
     }
 
     public static Student createStudent(GraduationClass graduationClass) {
@@ -45,7 +47,7 @@ public class Fixtures {
                 .setGender(Person.Gender.values()[Faker.instance().number().numberBetween(0, 2)]);
 
         graduationClass.addStudent(student);
-
+        student.setGrades(new ArrayList<>());
         return student;
     }
 

@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Log
 class SubjectTest extends Base {
@@ -69,13 +68,6 @@ class SubjectTest extends Base {
         final var teacher2 = Fixtures.createTeacher(subject2, null, student2);
         final var teacher3 = Fixtures.createTeacher(subject2, null, student3);
 
-        final Collection<Teacher> teachersSubject1 = new ArrayList<>();
-        teachersSubject1.add(teacher1);
-
-        final Collection<Teacher> teachersSubject2 = new ArrayList<>();
-        teachersSubject2.add(teacher2);
-        teachersSubject2.add(teacher3);
-
         entityManager.getTransaction().begin();
 
         entityManager.persist(subject1);
@@ -95,22 +87,13 @@ class SubjectTest extends Base {
 
         entityManager.getTransaction().commit();
 
-        entityManager.detach(subject1);
-        entityManager.detach(subject2);
-        entityManager.detach(student1);
-        entityManager.detach(student2);
-        entityManager.detach(student3);
-        entityManager.detach(teacher1);
-        entityManager.detach(teacher2);
-        entityManager.detach(teacher3);
-
         var pTeachersSubject1 = (ArrayList<Teacher>) subjectRepository.findTeachers(subject1.getId());
-        assertThat(pTeachersSubject1).isNotNull();
+        assertThat(pTeachersSubject1).isNotEmpty();
         var pTeachersSubject1Rep = new ArrayList<>(Arrays.asList(teacher1));
         assertThat(pTeachersSubject1).isEqualTo(pTeachersSubject1Rep);
 
         var pTeachersSubject2 = (ArrayList<Teacher>) subjectRepository.findTeachers(subject2.getId());
-        assertThat(pTeachersSubject2).isNotNull();
+        assertThat(pTeachersSubject2).isNotEmpty();
         var pTeachersSubject2Rep = new ArrayList<>(Arrays.asList(teacher2, teacher3));
         assertThat(pTeachersSubject2).isEqualTo(pTeachersSubject2Rep);
 
