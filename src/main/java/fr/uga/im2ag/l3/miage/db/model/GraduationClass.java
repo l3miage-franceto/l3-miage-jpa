@@ -93,4 +93,13 @@ public class GraduationClass {
     public int hashCode() {
         return Objects.hash(id, name, year, students);
     }
+
+    @Override
+    public String toString(){
+        return String.format("Graduation class\nId : %d\nName : %s\nYear : %d\nNumber of students : %d",
+                id,
+                name,
+                year,
+                students.size());
+    }
 }

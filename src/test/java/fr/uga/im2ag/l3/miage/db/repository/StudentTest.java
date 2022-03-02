@@ -2,17 +2,19 @@ package fr.uga.im2ag.l3.miage.db.repository;
 
 import fr.uga.im2ag.l3.miage.db.model.Student;
 import fr.uga.im2ag.l3.miage.db.repository.api.StudentRepository;
+import lombok.extern.java.Log;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@Log
 class StudentTest extends Base {
 
     StudentRepository studentRepository;
@@ -70,7 +72,6 @@ class StudentTest extends Base {
         final var s1Grade3 = Fixtures.createGrade(null).setValue(18.9F).setWeight(1F);
         student1.setGrades(Arrays.asList(s1Grade1, s1Grade2, s1Grade3));
         //avg = 14.78
-        //avg sans weight = 15.47
 
         final var student2 = Fixtures.createStudent(class1);
         final var s2Grade1 = Fixtures.createGrade(null).setValue(9.4F).setWeight(1F);
@@ -78,7 +79,6 @@ class StudentTest extends Base {
         final var s2Grade3 = Fixtures.createGrade(null).setValue(11.02F).setWeight(3F);
         student2.setGrades(Arrays.asList(s2Grade1, s2Grade2, s2Grade3));
         //avg = 10.604
-        //avg sans weight = 10.33
 
         final var class2 = Fixtures.createClass();
         final var student3 = Fixtures.createStudent(class2);
@@ -87,7 +87,6 @@ class StudentTest extends Base {
         final var s3Grade3 = Fixtures.createGrade(null).setValue(17.58F).setWeight(1F);
         student3.setGrades(Arrays.asList(s3Grade1, s3Grade2, s3Grade3));
         //avg = 15.496
-        //avg sans weight = 15.83
 
         entityManager.getTransaction().begin();
         entityManager.persist(class1);
@@ -102,7 +101,7 @@ class StudentTest extends Base {
         entityManager.detach(student2);
         entityManager.detach(student3);
 
-        var pStudentsAvg = (ArrayList<Student>) studentRepository.findStudentHavingGradeAverageAbove(14.7F);
+        var pStudentsAvg = (ArrayList<Student>) studentRepository.findStudentHavingGradeAverageAbove(14.77F);
         assertThat(pStudentsAvg).isNotEmpty();
         ArrayList<Student> pStudentAvgRep = new ArrayList<Student>(Arrays.asList(student1, student3));
         assertThat(pStudentsAvg).isEqualTo(pStudentAvgRep);

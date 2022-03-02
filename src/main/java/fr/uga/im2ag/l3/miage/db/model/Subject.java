@@ -29,9 +29,11 @@ public class Subject {
     private Float hours;
 
     @Column(name = "sub_start", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date start;
 
     @Column(name = "sub_end", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date end;
 
     public Long getId() {
@@ -96,22 +98,24 @@ public class Subject {
         return Objects.equals(id, subject.id)
                 && Objects.equals(name, subject.name)
                 && Objects.equals(points, subject.points)
-                && Objects.equals(hours, subject.hours);
+                && Objects.equals(hours, subject.hours)
+                && Objects.equals(start.getTime(), subject.getStart().getTime())
+                && Objects.equals(end.getTime(), subject.getEnd().getTime());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, points, hours);
+        return Objects.hash(id, name, points, hours, start, end);
     }
 
     @Override
     public String toString(){
         return String.format("Subject\nID : %d\nName : %s\nPoints : %d\nHours : %f\nStart : %s\nEnd : %s",
-                getId(),
-                getName(),
-                getPoints(),
-                getHours(),
-                getStart().toString(),
-                getEnd().toString());
+                id,
+                name,
+                points,
+                hours,
+                start.toString(),
+                end.toString());
     }
 }

@@ -91,10 +91,10 @@ public abstract class Person {
     @Override
     public String toString(){
         return String.format("ID : %d\nGender : %s\nFirstname : %s\nLastname : %s\nBirthday : %s",
-                getId(),
-                getGender(),
-                getFirstName(),
-                getLastName(),
-                getBirth());
+                id,
+                gender,
+                firstName,
+                lastName,
+                birth.toString());
     }
 }

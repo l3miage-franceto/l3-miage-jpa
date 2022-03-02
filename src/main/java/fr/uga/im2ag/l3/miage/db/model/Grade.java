@@ -78,10 +78,10 @@ public class Grade {
     @Override
     public String toString(){
         return String.format("Grade\nId : %d\nSubject ID : %d, Name : %s\nValue : %f\nWeight : %f\n",
-                getId(),
-                getSubject().getId(), getSubject().getName(),
-                getValue(),
-                getWeight());
+                id,
+                subject.getId(), subject.getName(),
+                value,
+                weight);
     }
 
 }

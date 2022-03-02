@@ -72,8 +72,8 @@ public class Teacher extends Person {
     public String toString(){
         return String.format("Teacher\n%s\nTeaches subject ID : %d, Name : %s\nHave %d favorite students\nHeads class ID : %d, Name : %s",
                 super.toString(),
-                getTeaching().getId(), getTeaching().getName(),
-                getFavorites().size(),
-                getHeading().getId(), getHeading().getName());
+                teaching.getId(), teaching.getName(),
+                favorites.size(),
+                heading.getId(), heading.getName());
     }
 }

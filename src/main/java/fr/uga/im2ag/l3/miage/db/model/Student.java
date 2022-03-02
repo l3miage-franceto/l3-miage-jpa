@@ -58,8 +58,9 @@ public class Student extends Person {
 
     @Override
     public String toString(){
-        return String.format("Student\n%s\nBelongs to class ID : %d, Name : %s\n",
+        return String.format("Student\n%s\nBelongs to class ID : %d, Name : %s\nNumber of grades : %d",
                 super.toString(),
-                getBelongTo().getId(), getBelongTo().getName());
+                belongTo.getId(), belongTo.getName(),
+                grades.size());
     }
 }
