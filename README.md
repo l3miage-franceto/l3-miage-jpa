@@ -2,6 +2,11 @@
 
 Vous avez deux scéance de TP pour en venir à bout, vous être libre de continuer chez vous.
 
+# Rendu
+
+* FRANCES Tom
+* GOURDON Jérémie
+
 ## Pre requis
 
 * java 11+
