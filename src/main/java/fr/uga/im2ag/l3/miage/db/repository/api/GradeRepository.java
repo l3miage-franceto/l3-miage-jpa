@@ -23,4 +23,5 @@ public interface GradeRepository extends Repository<Grade, Long> {
      */
     List<Grade> findHighestGradesBySubject(float limit, Subject subject);
 
+    void updateGradeValue(long id);
 }

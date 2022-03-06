@@ -57,34 +57,20 @@ class GradeTest extends Base {
         final var subject = Fixtures.createSubject();
         final var grade = Fixtures.createGrade(subject);
         grade.setValue(13.6F);
-        final var grade2 = Fixtures.createGrade(subject);
-        grade2.setValue(14.6F);
 
         entityManager.getTransaction().begin();
         entityManager.persist(subject);
         gradeRepository.save(grade);
-        gradeRepository.save(grade2);
         entityManager.getTransaction().commit();
 
-        grade.setValue(10.9F);
+        grade.setValue(9.8F);
+        gradeRepository.save(grade);    //équivalent update
 
-        Grade pGrade = gradeRepository.findById(grade.getId());
-        log.info("grade value " + pGrade.getValue());
+        entityManager.detach(grade);
 
-        int resQuery;
-        entityManager.getTransaction().begin();
-        Query query = entityManager.createQuery("update Grade g set g.value = 10.6F");
-        resQuery = query.executeUpdate();
-        assertThat(resQuery).isEqualTo(0);
-        entityManager.getTransaction().commit();
-
-        /*
         var pGrade = gradeRepository.findById(grade.getId());
-        assertThat(pGrade).isNotNull().isNotSameAs(grade);
-        grade.setValue((float)12.673);
-        assertThat(grade).isNotEqualTo(pGrade);
+        assertThat(pGrade.getValue()).isNotEqualTo(grade.getValue());
 
-         */
     }
 
     @Test

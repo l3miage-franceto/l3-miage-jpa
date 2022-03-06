@@ -8,7 +8,8 @@ import java.util.Objects;
         @NamedQuery(name = "Grade.findHighestGrades", query = "select g from Grade g where g.value > :limit"),
         @NamedQuery(name = "Grade.findHighestGradeByStudent", query = "select g from Grade g where g.subject = :subject and g.value > :limit"),
         @NamedQuery(name = "Grade.findById", query = "select g from Grade g where g.id = :id"),
-        @NamedQuery(name = "Grade.getAll", query = "select g from Grade g")
+        @NamedQuery(name = "Grade.getAll", query = "select g from Grade g"),
+        @NamedQuery(name = "Grade.updateValue", query = "update Grade g set g.value = 9.8 where g.id = :id")
 })
 @Entity
 @Table(name = "Grade")

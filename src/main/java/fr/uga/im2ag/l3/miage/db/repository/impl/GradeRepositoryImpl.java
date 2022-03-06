@@ -37,6 +37,13 @@ public class GradeRepositoryImpl extends BaseRepositoryImpl implements GradeRepo
     }
 
     @Override
+    public void updateGradeValue(long id) {
+        entityManager.createNamedQuery("Grade.updateValue", Grade.class)
+                .setParameter("id", id)
+                .executeUpdate();
+    }
+
+    @Override
     public void save(Grade entity) {
         entityManager.persist(entity);
     }

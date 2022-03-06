@@ -11,7 +11,7 @@ import java.util.Objects;
 @DiscriminatorValue(PersonType.Values.TEACHER)
 @NamedQueries({
         @NamedQuery(name = "Teacher.findHeadingGraduationClassByYearAndName", query = "select t from Teacher t join t.heading gc where gc.year = :year and gc.name = :name"),
-        @NamedQuery(name = "Teacher.getAll", query = "select t from Teacher t")
+        @NamedQuery(name = "Teacher.getAll", query = "update Grade g set g.value = 10.6F where g.id = :id")
 })
 public class Teacher extends Person {
 
